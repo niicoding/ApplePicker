@@ -7,19 +7,18 @@ using UnityEngine;
 public class AppleTree : MonoBehaviour {
     [Header("Set in Inspector")]
     public GameObject applePrefab;
-    // Speed at which the AppleTree moves, distance where AppleTree turns around, chance that the AppleTree will change directions,
-    // rate at which Apples will be instantiated.
+    // Apple from ApplePrefab, Speed at which the AppleTree moves, distance where AppleTree turns around, chance that the AppleTree will change directions,
+    // rate at which Apples will be instantiated, list of apple drop speeds.
     public float speed, leftAndRightEdge = 10f, chanceToChangeDirections = 0.02f, secondsBetweenAppleDrops = 1f;
     public List<float> dropSpeedList = new List<float> { -1f, -1000f, -10000f };
 
     void Start() {
-        Invoke(nameof(DropApple), 1f);  // Dropping apples every second.
+        Invoke(nameof(DropApple), 2f);  // Dropping apples every second.
     }
     void DropApple() {
         GameObject apple = Instantiate<GameObject>(applePrefab);
         apple.transform.position = transform.position;
         Apple.SetDifficulty(int.Parse(Basket.ScoreGT.text), dropSpeedList, apple.GetComponent<Rigidbody>(), apple.GetComponent<Renderer>());
-
         Invoke(nameof(DropApple), secondsBetweenAppleDrops);
     }
 
@@ -27,8 +26,7 @@ public class AppleTree : MonoBehaviour {
         // Basic movement.
         Vector3 pos = transform.position; 
         pos.x += speed * Time.deltaTime;
-        transform.position = pos;
-        // Changing direction.
+        transform.position = pos; // Changing direction.
         if (pos.x < -leftAndRightEdge) // Hit left edge.
             speed = Mathf.Abs(speed); // Move right.
         else if (pos.x > leftAndRightEdge) // Hit right edge.

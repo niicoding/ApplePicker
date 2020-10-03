@@ -8,17 +8,16 @@ public class HighScore : MonoBehaviour {
         
     }
     private void Awake() {
-        // If the PlayerPrefs HighScore already exists, read it.
-        if (PlayerPrefs.HasKey("HighScore")) 
+        if (PlayerPrefs.HasKey("HighScore")) // If the PlayerPrefs HighScore already exists, read it.
             score = PlayerPrefs.GetInt("HighScore");
-        // Assign the high score to HighScore.
-        PlayerPrefs.SetInt("HighScore", score);
+        PlayerPrefs.SetInt("HighScore", score); // Assign the high score to HighScore.
+
     }
     void Update() {
-        Text gt = this.GetComponent<Text>();
-        gt.text = "High Score: " + score;
+        Text gt = this.GetComponent<Text>(); // Get text component from HighScore component on the canvas.
+        gt.text = "High Score: " + score; // Set the above to the current high score found in memory.
 
-        if (score > PlayerPrefs.GetInt("HighScore"))
+        if (score > PlayerPrefs.GetInt("HighScore")) // Check if the current score is higher than the HighScore, update it.
             PlayerPrefs.SetInt("HighScore", score);
     }
 }
