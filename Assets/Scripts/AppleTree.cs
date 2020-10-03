@@ -18,6 +18,7 @@ public class AppleTree : MonoBehaviour {
     void DropApple() {
         GameObject apple = Instantiate<GameObject>(applePrefab);
         Rigidbody rb = apple.GetComponent<Rigidbody>();
+        float r = 5f;
         apple.transform.position = transform.position;
 
         // Three difficulties depending your score [ 0 <= 1000 <= 10000 ].
