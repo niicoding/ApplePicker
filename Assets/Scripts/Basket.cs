@@ -39,7 +39,11 @@ public class Basket : MonoBehaviour {
             Destroy(collidedWith);
             int score = int.Parse(scoreGT.text); // Parse the text of the scoreGT into an int.
             Color color = collidedWith.GetComponent<Renderer>().material.color; // Color of the colliding apple.
-            score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100; // 300 points for red, 200 points for yellow, 100 points for red (default).
+            Color basketColor = this.gameObject.GetComponent<Renderer>().material.color; // Color of the collidedBasket
+
+            if (ApplePicker.extraHard && basketColor == color) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
+            else if (!ApplePicker.extraHard) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
+
             // Convert the score back to a string and display it.
             scoreGT.text = score.ToString();
             // Track the high score.

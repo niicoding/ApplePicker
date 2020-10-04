@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Apple : MonoBehaviour {
     public float bottomY = -20f; // Below visible screen.
-    public List<float> dropSpeedList = new List<float> { -1f, -1000f, -2500f };
+    public List<float> dropSpeedList = new List<float> { -1f, -200f, -300f };
     public void Start() {
+        this.gameObject.GetComponent<Renderer>().material.color = Color.red;
         SetDifficulty(this.gameObject.GetComponent<Rigidbody>(), this.gameObject.GetComponent<Renderer>(), int.Parse(Basket.ScoreGT.text));
     }
     void Update() {
@@ -24,14 +25,14 @@ public class Apple : MonoBehaviour {
         switch (scoreNumeric) {
             // 50% chance of executing when score >= 1000. Medium difficulty.
             case var expression when (Random.Range(0, 2)) * scoreNumeric >= 1000:
-                // Change apple drop speed to -1000f.
+                // Change apple drop speed to -750f.
                 rigidBody.AddForce(rigidBody.transform.up * dropSpeedList[1]);
                 // Change apple color to yellow.
                 renderer.material.color = Color.yellow;
                 break;
             // 25% chance of executing when score >= 2000. Hard difficulty.
             case var expression when (Random.Range(0, 2)) * scoreNumeric > 2500:
-                // Change apple drop speed to -10000f.
+                // Change apple drop speed to -1500f.
                 rigidBody.AddForce(rigidBody.transform.up * dropSpeedList[2]);
                 // Change apple color to green.
                 renderer.material.color = Color.green;

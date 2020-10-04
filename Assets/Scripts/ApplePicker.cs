@@ -23,7 +23,7 @@ public class ApplePicker : MonoBehaviour {
         }
     }
     void Update() {
-        if (extraHard)
+        if (extraHard && basketList.Count != 0)
             if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
                 StartExtraHardMode();
     }
