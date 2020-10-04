@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // This line enables use of uGUI features.
 public class Basket : MonoBehaviour {
-    private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
     [Header("Set Dynamically")]
     public static Text scoreGT;
 
@@ -21,9 +20,7 @@ public class Basket : MonoBehaviour {
         scoreGT.text = "0";
     }
 
-    void SwitchColours(List<Color> colourList) {
-
-    }
+    
 
     void Update() {
         // Get the current screen position of the mouse from Input.
@@ -37,6 +34,11 @@ public class Basket : MonoBehaviour {
         pos.x = mousePos3D.x;
         this.transform.position = pos;
     }
+
+    void changeColors(GameObject basket, float frequency) {
+
+    }
+
     private void OnCollisionEnter(Collision collision) {
         // Find out what hit this basket.
         GameObject collidedWith = collision.gameObject;
