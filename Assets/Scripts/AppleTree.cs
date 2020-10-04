@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
-using UnityEditor.UIElements;
-using UnityEditorInternal;
 using UnityEngine;
 public class AppleTree : MonoBehaviour {
     [Header("Set in Inspector")]

@@ -9,6 +9,6 @@ public class GameOverMenu : MonoBehaviour {
         
     }
     public void SwitchMainMenu() {
-        SceneManager.LoadScene("Scenes/Menu"); // Load Main Menu.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1); ; // Load Main Menu.
     }
 }
