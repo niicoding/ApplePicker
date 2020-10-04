@@ -36,13 +36,17 @@ public class ApplePicker : MonoBehaviour {
         GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
         foreach (GameObject tGO in tAppleArray) // Destroy all of the falling apples.
             Destroy(tGO);
+        BasketDestroyed();
+    }
+
+    public void BasketDestroyed() {
         int basketIndex = basketList.Count - 1; // Get the index of the last Basket in basketList, destroy.
         GameObject tBasketGO = basketList[basketIndex]; // Get a reference to that Basket GameObject
         basketList.RemoveAt(basketIndex); // Remove the Basket from the list.
-        tBasketGO.GetComponent<Renderer>().material.color = Color.grey;
-       
+
         Destroy(tBasketGO); // Destroy GameObject.
-        if (basketList.Count == 0) { // If there are no Baskets left, restart the game.
+        if (basketList.Count == 0)
+        { // If there are no Baskets left, restart the game.
             Basket.scoreGT.text = "0";
             extraHard = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

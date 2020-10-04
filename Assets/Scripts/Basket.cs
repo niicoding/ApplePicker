@@ -35,13 +35,14 @@ public class Basket : MonoBehaviour {
         // Find out what hit this basket.
         GameObject collidedWith = collision.gameObject;
 
+        ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
         if (collidedWith.tag == "Apple") {
             Destroy(collidedWith);
             int score = int.Parse(scoreGT.text); // Parse the text of the scoreGT into an int.
             Color color = collidedWith.GetComponent<Renderer>().material.color; // Color of the colliding apple.
             Color basketColor = this.gameObject.GetComponent<Renderer>().material.color; // Color of the collidedBasket
-
             if (ApplePicker.extraHard && basketColor == color) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
+            else if (ApplePicker.extraHard && basketColor != color) apScript.BasketDestroyed();
             else if (!ApplePicker.extraHard) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
 
             // Convert the score back to a string and display it.
