@@ -33,6 +33,8 @@ public class Basket : MonoBehaviour {
         Vector3 pos = this.transform.position;
         pos.x = mousePos3D.x;
         this.transform.position = pos;
+
+        if (int.Parse(ScoreGT.text) >= 5000) ApplePicker.extraHard = true; 
     }
 
     private void OnCollisionEnter(Collision collision) {

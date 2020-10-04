@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class ApplePicker : MonoBehaviour {
     public int numBaskets = 3;
     public float basketBottomY = -14f, basketSpacingY = 2f;
     public List<GameObject> basketList;
+    public static bool extraHard = false;
 
     private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
     
@@ -25,10 +27,14 @@ public class ApplePicker : MonoBehaviour {
         }
     }
     void Update() {
-        if (int.Parse(Basket.ScoreGT.text) >= 5000 && !colourList.Contains(basketList[0].GetComponent<Renderer>().material.color)) {
-            InitializeColours(basketList);
-            Invoke(nameof(RotateColours), 5f);
-        }
+        if (extraHard)
+            if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
+                StartExtraHardMode();
+    }
+
+    void StartExtraHardMode() {
+        InitializeColours(basketList);
+        Invoke(nameof(RotateColours), 5f);
     }
     public void AppleDestroyed() {
         GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
@@ -44,6 +50,7 @@ public class ApplePicker : MonoBehaviour {
     void InitializeColours(List<GameObject> basketList) {
         foreach (Color colour in colourList)
             basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
+      
     }
 
     void RotateColours() {
