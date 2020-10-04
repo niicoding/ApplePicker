@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // This line enables use of uGUI features.
 public class Basket : MonoBehaviour {
+    private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
     [Header("Set Dynamically")]
     public static Text scoreGT;
 
@@ -19,6 +20,11 @@ public class Basket : MonoBehaviour {
         // Set the starting number of points to 0.
         scoreGT.text = "0";
     }
+
+    void SwitchColours(List<Color> colourList) {
+
+    }
+
     void Update() {
         // Get the current screen position of the mouse from Input.
         Vector3 mousePos2D = Input.mousePosition;

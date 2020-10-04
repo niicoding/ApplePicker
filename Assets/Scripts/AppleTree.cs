@@ -8,7 +8,7 @@ public class AppleTree : MonoBehaviour {
     // Apple from ApplePrefab, Speed at which the AppleTree moves, distance where AppleTree turns around, chance that the AppleTree will change directions,
     // rate at which Apples will be instantiated, list of apple drop speeds.
     public float speed, leftAndRightEdge = 10f, chanceToChangeDirections = 0.02f, secondsBetweenAppleDrops = 1f;
-    public List<float> dropSpeedList = new List<float> { -1f, -1000f, -2500f };
+    
 
     public GameObject ApplePrefab {
         get { return applePrefab; }
@@ -21,7 +21,6 @@ public class AppleTree : MonoBehaviour {
     void DropApple() {
         GameObject ApplePrefab = Instantiate<GameObject>(applePrefab);
         ApplePrefab.transform.position = transform.position;
-        Apple.SetDifficulty(int.Parse(Basket.ScoreGT.text), dropSpeedList, ApplePrefab.GetComponent<Rigidbody>(), ApplePrefab.GetComponent<Renderer>());
         Invoke(nameof(DropApple), secondsBetweenAppleDrops);
     }
 
