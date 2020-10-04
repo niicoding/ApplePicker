@@ -35,10 +35,6 @@ public class Basket : MonoBehaviour {
         this.transform.position = pos;
     }
 
-    void changeColors(GameObject basket, float frequency) {
-
-    }
-
     private void OnCollisionEnter(Collision collision) {
         // Find out what hit this basket.
         GameObject collidedWith = collision.gameObject;
