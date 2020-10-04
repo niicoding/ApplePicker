@@ -23,12 +23,12 @@ public class ApplePicker : MonoBehaviour {
             tBasketGO.transform.position = pos;
             basketList.Add(tBasketGO);
         }
-        
-        InitializeColours(basketList);
-        Invoke(nameof(RotateColours), 5f);
     }
     void Update() {
-        
+        if (int.Parse(Basket.ScoreGT.text) >= 5000 && !colourList.Contains(basketList[0].GetComponent<Renderer>().material.color)) {
+            InitializeColours(basketList);
+            Invoke(nameof(RotateColours), 5f);
+        }
     }
     public void AppleDestroyed() {
         GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
