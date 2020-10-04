@@ -9,6 +9,11 @@ public class ApplePicker : MonoBehaviour {
     public float basketBottomY = -14f, basketSpacingY = 2f;
     public List<GameObject> basketList;
 
+    private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
+    enum BasketColors { Red, Yellow, Green }
+    List<BasketColors> basketColors;
+
+
     void Start() {        
         basketList = new List<GameObject>();
         for (int i = 0; i < numBaskets; i++) {
@@ -18,6 +23,8 @@ public class ApplePicker : MonoBehaviour {
             tBasketGO.transform.position = pos;
             basketList.Add(tBasketGO);
         }
+
+        InitializeColours(basketList);
     }
     void Update() {
         
@@ -32,5 +39,17 @@ public class ApplePicker : MonoBehaviour {
         Destroy(tBasketGO); // Destroy GameObject.
         if (basketList.Count == 0) // If there are no Baskets left, restart the game.
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    void InitializeColours(List<GameObject> basketList) {
+        foreach (GameObject basket in basketList)
+            foreach (Color colour in colourList)
+                if (colour != basket.GetComponent<Renderer>().material.color)
+                    if (basketList.IndexOf(basket) == 2)
+                        foreach (GameObject _basket in basketList)
+                            _basket.GetComponent<Renderer>().material.color = colourList[basketList.IndexOf(_basket)];
+                    else
+                        continue;
+                else
+                    continue;
     }
 }
