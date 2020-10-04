@@ -23,9 +23,10 @@ public class ApplePicker : MonoBehaviour {
         }
     }
     void Update() {
-        if (extraHard && basketList.Count != 0)
-            if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
-                StartExtraHardMode();
+        if (basketList.Count != 0) 
+            if (extraHard)
+                if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
+                    StartExtraHardMode();
     }
     void StartExtraHardMode() {
         InitializeColours(basketList);
@@ -38,9 +39,14 @@ public class ApplePicker : MonoBehaviour {
         int basketIndex = basketList.Count - 1; // Get the index of the last Basket in basketList, destroy.
         GameObject tBasketGO = basketList[basketIndex]; // Get a reference to that Basket GameObject
         basketList.RemoveAt(basketIndex); // Remove the Basket from the list.
+        tBasketGO.GetComponent<Renderer>().material.color = Color.grey;
+       
         Destroy(tBasketGO); // Destroy GameObject.
-        if (basketList.Count == 0) // If there are no Baskets left, resta.rt the game.
+        if (basketList.Count == 0) { // If there are no Baskets left, restart the game.
+            Basket.scoreGT.text = "0";
+            extraHard = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
     void InitializeColours(List<GameObject> basketList) {
         foreach (Color colour in colourList)
