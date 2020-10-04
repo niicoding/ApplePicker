@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HighScore : MonoBehaviour {
     static public int score = 1000;
-    void Start() {
-        
-    }
     private void Awake() {
         if (PlayerPrefs.HasKey("HighScore")) // If the PlayerPrefs HighScore already exists, read it.
             score = PlayerPrefs.GetInt("HighScore");

@@ -8,14 +8,10 @@ public class ApplePicker : MonoBehaviour {
     [Header("Set in Inspector")]
     public GameObject basketPrefab;
     public int numBaskets = 3;
+    public static bool extraHard = false;
     public float basketBottomY = -14f, basketSpacingY = 2f;
     public List<GameObject> basketList;
-    public static bool extraHard = false;
-
     private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
-    
-
-
     void Start() {        
         basketList = new List<GameObject>();
         for (int i = 0; i < numBaskets; i++) {
@@ -31,7 +27,6 @@ public class ApplePicker : MonoBehaviour {
             if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
                 StartExtraHardMode();
     }
-
     void StartExtraHardMode() {
         InitializeColours(basketList);
         Invoke(nameof(RotateColours), 5f);
@@ -50,9 +45,7 @@ public class ApplePicker : MonoBehaviour {
     void InitializeColours(List<GameObject> basketList) {
         foreach (Color colour in colourList)
             basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
-      
     }
-
     void RotateColours() {
         Color basketColour;
         foreach (GameObject basket in basketList) {
@@ -62,17 +55,4 @@ public class ApplePicker : MonoBehaviour {
         }
         Invoke(nameof(RotateColours), 5f);
     }
-
-    /*
-     * foreach (GameObject basket in basketList)
-            foreach (Color colour in colourList)
-                if (colour != basket.GetComponent<Renderer>().material.color)
-                    if (basketList.IndexOf(basket) == 2)
-                        foreach (GameObject _basket in basketList)
-                            _basket.GetComponent<Renderer>().material.color = colourList[basketList.IndexOf(_basket)];
-                    else
-                        continue;
-                else
-                    continue;
-     */
 }

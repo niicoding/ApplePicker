@@ -8,13 +8,10 @@ public class AppleTree : MonoBehaviour {
     // Apple from ApplePrefab, Speed at which the AppleTree moves, distance where AppleTree turns around, chance that the AppleTree will change directions,
     // rate at which Apples will be instantiated, list of apple drop speeds.
     public float speed, leftAndRightEdge = 10f, chanceToChangeDirections = 0.02f, secondsBetweenAppleDrops = 1f;
-    
-
     public GameObject ApplePrefab {
         get { return applePrefab; }
         set { applePrefab = value; }
     }
-
     void Start() {
         Invoke(nameof(DropApple), 2f);  // Dropping apples every second.
     }
@@ -23,7 +20,6 @@ public class AppleTree : MonoBehaviour {
         ApplePrefab.transform.position = transform.position;
         Invoke(nameof(DropApple), secondsBetweenAppleDrops);
     }
-
     void Update() {
         // Basic movement.
         Vector3 pos = transform.position; 

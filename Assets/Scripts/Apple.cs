@@ -29,8 +29,8 @@ public class Apple : MonoBehaviour {
                 // Change apple color to yellow.
                 renderer.material.color = Color.yellow;
                 break;
-            // 25% chance of executing when score >= 3000. Hard difficulty.
-            case var expression when (Random.Range(0, 2)) * scoreNumeric > 3000:
+            // 25% chance of executing when score >= 2000. Hard difficulty.
+            case var expression when (Random.Range(0, 2)) * scoreNumeric > 2500:
                 // Change apple drop speed to -10000f.
                 rigidBody.AddForce(rigidBody.transform.up * dropSpeedList[2]);
                 // Change apple color to green.

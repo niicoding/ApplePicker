@@ -5,12 +5,10 @@ using UnityEngine.UI; // This line enables use of uGUI features.
 public class Basket : MonoBehaviour {
     [Header("Set Dynamically")]
     public static Text scoreGT;
-
     public static Text ScoreGT {
         get { return scoreGT; }
         set { scoreGT = value; }
     }
-
     void Start() {
         // Find a reference to the ScoreCounter GameObject.
         GameObject scoreGO = GameObject.Find("ScoreCounter");
@@ -19,9 +17,6 @@ public class Basket : MonoBehaviour {
         // Set the starting number of points to 0.
         scoreGT.text = "0";
     }
-
-    
-
     void Update() {
         // Get the current screen position of the mouse from Input.
         Vector3 mousePos2D = Input.mousePosition;
@@ -34,9 +29,8 @@ public class Basket : MonoBehaviour {
         pos.x = mousePos3D.x;
         this.transform.position = pos;
 
-        if (int.Parse(ScoreGT.text) >= 5000) ApplePicker.extraHard = true; 
+        if (int.Parse(ScoreGT.text) >= 4000) ApplePicker.extraHard = true; 
     }
-
     private void OnCollisionEnter(Collision collision) {
         // Find out what hit this basket.
         GameObject collidedWith = collision.gameObject;
