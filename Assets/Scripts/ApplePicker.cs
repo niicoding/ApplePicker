@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class ApplePicker : MonoBehaviour {
@@ -10,8 +11,7 @@ public class ApplePicker : MonoBehaviour {
     public List<GameObject> basketList;
 
     private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
-    enum BasketColors { Red, Yellow, Green }
-    List<BasketColors> basketColors;
+    
 
 
     void Start() {        
@@ -23,8 +23,9 @@ public class ApplePicker : MonoBehaviour {
             tBasketGO.transform.position = pos;
             basketList.Add(tBasketGO);
         }
-
+        
         InitializeColours(basketList);
+        Invoke(nameof(RotateColours), 5f);
     }
     void Update() {
         
@@ -37,11 +38,26 @@ public class ApplePicker : MonoBehaviour {
         GameObject tBasketGO = basketList[basketIndex]; // Get a reference to that Basket GameObject
         basketList.RemoveAt(basketIndex); // Remove the Basket from the list.
         Destroy(tBasketGO); // Destroy GameObject.
-        if (basketList.Count == 0) // If there are no Baskets left, restart the game.
+        if (basketList.Count == 0) // If there are no Baskets left, resta.rt the game.
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     void InitializeColours(List<GameObject> basketList) {
-        foreach (GameObject basket in basketList)
+        foreach (Color colour in colourList)
+            basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
+    }
+
+    void RotateColours() {
+        Color basketColour;
+        foreach (GameObject basket in basketList) {
+            basketColour = basket.GetComponent<Renderer>().material.color;
+            basketColour = colourList[(colourList.IndexOf(basketColour) + 1 == 3) ? 0 : colourList.IndexOf(basketColour) + 1];
+            basket.GetComponent<Renderer>().material.color = basketColour;
+        }
+        Invoke(nameof(RotateColours), 5f);
+    }
+
+    /*
+     * foreach (GameObject basket in basketList)
             foreach (Color colour in colourList)
                 if (colour != basket.GetComponent<Renderer>().material.color)
                     if (basketList.IndexOf(basket) == 2)
@@ -51,5 +67,5 @@ public class ApplePicker : MonoBehaviour {
                         continue;
                 else
                     continue;
-    }
+     */
 }
