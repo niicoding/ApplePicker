@@ -5,11 +5,15 @@ using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class ApplePicker : MonoBehaviour {
+    private static bool extraHard = false;
+    public bool ExtraHard {
+        get { return extraHard; }
+        set { extraHard = value; }
+    }
+
     [Header("Set in Inspector")]
     public GameObject basketPrefab;
     public int numBaskets = 3;
-    public static bool extraHard = false;
-    public static bool extraHardMode = false;
     public float basketBottomY = -14f, basketSpacingY = 2f;
     public List<GameObject> basketList;
     private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
@@ -54,7 +58,6 @@ public class ApplePicker : MonoBehaviour {
         if (basketList.Count == 0)
         { // If there are no Baskets left, restart the game.
             Basket.scoreGT.text = "0";
-            extraHardMode = false;
             extraHard = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

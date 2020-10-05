@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // This line enables use of uGUI features.
 public class Basket : MonoBehaviour {
+    ApplePicker apScript;
     [Header("Set Dynamically")]
     public static Text scoreGT;
     public static Text ScoreGT
@@ -11,6 +12,7 @@ public class Basket : MonoBehaviour {
         set { scoreGT = value; }
     }
     void Start() {
+        apScript = Camera.main.GetComponent<ApplePicker>();
         // Find a reference to the ScoreCounter GameObject.
         GameObject scoreGO = GameObject.Find("ScoreCounter");
         // Get the Text Component of that GameObject.
@@ -30,7 +32,7 @@ public class Basket : MonoBehaviour {
         pos.x = mousePos3D.x;
         this.transform.position = pos;
 
-        if (int.Parse(ScoreGT.text) >= 4000) ApplePicker.extraHard = true;
+        if (int.Parse(ScoreGT.text) >= 4000) apScript.ExtraHard = true;
     }
     private void OnCollisionEnter(Collision collision) {
         // Find out what hit this basket.
@@ -43,9 +45,9 @@ public class Basket : MonoBehaviour {
             int score = int.Parse(scoreGT.text); // Parse the text of the scoreGT into an int.
             Color color = collidedWith.GetComponent<Renderer>().material.color, basketColor = this.gameObject.GetComponent<Renderer>().material.color; // Color of the collidedBasket
 
-            if (ApplePicker.extraHard && basketColor == color) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
-            else if (ApplePicker.extraHard && basketColor != color) apScript.BasketDestroyed();
-            else if (!ApplePicker.extraHard) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
+            if (apScript.ExtraHard && basketColor == color) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
+            else if (apScript.ExtraHard && basketColor != color) apScript.BasketDestroyed();
+            else if (!apScript.ExtraHard) score += (color == Color.green) ? 300 : (color == Color.yellow) ? 200 : 100;
 
             // Convert the score back to a string and display it.
             scoreGT.text = score.ToString();
