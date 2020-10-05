@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 public class Apple : MonoBehaviour {
     private static float bottomY = -20f; // Below visible screen.
     private static List<float> dropSpeedList = new List<float> { -1f, -1f, -1f };
-    //private static Color defaultAppleColor = Color.red;
     private GameObject apple;
     private Color appleColor;
     private ApplePicker apScript;
 
     private void Start() {
         apple = this.gameObject;
-        //apple.GetComponent<Renderer>().material.color = defaultAppleColor;
-        appleColor = GetComponent<Renderer>().material.color;
+        appleColor = GetComponent<Renderer>().material.color;   
         apScript = Camera.main.GetComponent<ApplePicker>();
-        //this.gameObject.GetComponent<Renderer>().material.color = Color.red;
         SetDifficulty(GetComponent<Rigidbody>(), GetComponent<Renderer>(), int.Parse(Basket.ScoreGT.text));
     }
     private void Update() {
