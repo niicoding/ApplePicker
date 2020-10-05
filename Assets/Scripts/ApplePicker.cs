@@ -39,6 +39,12 @@ public class ApplePicker : MonoBehaviour {
         BasketDestroyed();
     }
 
+    public void DestroyApples() {
+        GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
+        foreach (GameObject tGO in tAppleArray) // Destroy all of the falling apples.
+            Destroy(tGO);
+    }
+
     public void BasketDestroyed() {
         int basketIndex = basketList.Count - 1; // Get the index of the last Basket in basketList, destroy.
         GameObject tBasketGO = basketList[basketIndex]; // Get a reference to that Basket GameObject
@@ -54,11 +60,13 @@ public class ApplePicker : MonoBehaviour {
         }
     }
     void InitializeColours(List<GameObject> basketList) {
+        DestroyApples();
             foreach (Color colour in colourList)
                 if (colourList.IndexOf(colour) < basketList.Count)
                     basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
     }
     void RotateColours() {
+        DestroyApples();
         Color basketColour;
         foreach (GameObject basket in basketList) {
             basketColour = basket.GetComponent<Renderer>().material.color;
