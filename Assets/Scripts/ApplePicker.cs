@@ -68,7 +68,6 @@ public class ApplePicker : MonoBehaviour {
                     basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
     }
     private void RotateColours() {
-        DestroyApples();
         Color basketColour;
         foreach (GameObject basket in BasketList) {
             basketColour = basket.GetComponent<Renderer>().material.color;

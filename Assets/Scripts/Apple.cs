@@ -18,13 +18,12 @@ public class Apple : MonoBehaviour {
     }
     private void Update() {
         if (apScript.BasketList.Count != 0) {                     
-            Color basketColor = apScript.BasketList[apScript.BasketList.Count - 1].GetComponent<Renderer>().material.color;
             if (transform.position.y < bottomY && !apScript.ExtraHard) {  // If offscreen, delete apple.
                 Destroy(apple);
                 apScript.AppleDestroyed(); // Get a reference to the Apple Picker component of the Main Camera. Call the public AppleDestroyed() method of apScript
             } else if (transform.position.y < bottomY && apScript.ExtraHard) {
                 Destroy(apple);
-                if (appleColor == basketColor) apScript.AppleDestroyed(); // Get a reference to the Apple Picker component of the Main Camera. Call the public AppleDestroyed() method of apScript
+                if (apple.GetComponent<Renderer>().material.color == apScript.BasketList[apScript.BasketList.Count - 1].GetComponent<Renderer>().material.color) apScript.AppleDestroyed(); // Get a reference to the Apple Picker component of the Main Camera. Call the public AppleDestroyed() method of apScript
             }
         }
     }
