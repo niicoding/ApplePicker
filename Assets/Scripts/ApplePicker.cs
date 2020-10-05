@@ -9,6 +9,7 @@ public class ApplePicker : MonoBehaviour {
     public GameObject basketPrefab;
     public int numBaskets = 3;
     public static bool extraHard = false;
+    public static bool extraHardMode = false;
     public float basketBottomY = -14f, basketSpacingY = 2f;
     public List<GameObject> basketList;
     private static List<Color> colourList = new List<Color> { Color.red, Color.yellow, Color.green };
@@ -23,8 +24,7 @@ public class ApplePicker : MonoBehaviour {
         }
     }
     void Update() {
-        if (basketList.Count != 0) 
-            if (extraHard)
+        if (extraHard && basketList.Count != 0)
                 if (!colourList.Contains(basketList[0].GetComponent<Renderer>().material.color))
                     StartExtraHardMode();
     }
@@ -48,13 +48,15 @@ public class ApplePicker : MonoBehaviour {
         if (basketList.Count == 0)
         { // If there are no Baskets left, restart the game.
             Basket.scoreGT.text = "0";
+            extraHardMode = false;
             extraHard = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
     void InitializeColours(List<GameObject> basketList) {
-        foreach (Color colour in colourList)
-            basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
+            foreach (Color colour in colourList)
+                if (colourList.IndexOf(colour) < basketList.Count)
+                    basketList[colourList.IndexOf(colour)].GetComponent<Renderer>().material.color = colour;
     }
     void RotateColours() {
         Color basketColour;

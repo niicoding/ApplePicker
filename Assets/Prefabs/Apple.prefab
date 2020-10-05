@@ -124,3 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottomY: -20
+  dropSpeedList:
+  - -1
+  - -10
+  - -20

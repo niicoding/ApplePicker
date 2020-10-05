@@ -5,19 +5,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Apple : MonoBehaviour {
     public float bottomY = -20f; // Below visible screen.
-    public List<float> dropSpeedList = new List<float> { -1f, -100f, -200f };
+    public List<float> dropSpeedList = new List<float> { -1f, -1f, -1f };
     public void Start() {
         this.gameObject.GetComponent<Renderer>().material.color = Color.red;
         SetDifficulty(this.gameObject.GetComponent<Rigidbody>(), this.gameObject.GetComponent<Renderer>(), int.Parse(Basket.ScoreGT.text));
     }
     void Update() {
-        // If offscreen, delete apple.
-        if (transform.position.y < bottomY) {
-            Destroy(this.gameObject);
-            // Get a reference to the Apple Picker component of the Main Camera.
-            ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
-            // Call the public AppleDestroyed() method of apScript
-            apScript.AppleDestroyed();
+        ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
+        if (apScript.basketList.Count != 0) {
+            Color appleColor = this.gameObject.GetComponent<Renderer>().material.color;
+            Color basketColor = apScript.basketList[apScript.basketList.Count - 1].GetComponent<Renderer>().material.color;
+            // If offscreen, delete apple.
+            if (transform.position.y < bottomY && !ApplePicker.extraHard) {
+                Destroy(this.gameObject);
+                // Get a reference to the Apple Picker component of the Main Camera.
+                // Call the public AppleDestroyed() method of apScript
+                apScript.AppleDestroyed();
+            } else if (transform.position.y < bottomY && ApplePicker.extraHard) {
+                Destroy(this.gameObject);
+                // Get a reference to the Apple Picker component of the Main Camera.
+                // Call the public AppleDestroyed() method of apScript
+                if (appleColor == basketColor)
+                    apScript.AppleDestroyed();
+            }
         }
     }
     public void SetDifficulty(Rigidbody rigidBody, Renderer renderer, int scoreNumeric) {
