@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Apple : MonoBehaviour {
     private static float bottomY = -20f; // Below visible screen.
-    private static List<float> dropSpeedList = new List<float> { -1f, -100f, -200f };
+    private static List<float> dropSpeedList = new List<float> { -1f, -300f, -600f };
     private GameObject apple;
     private Color appleColor;
     private ApplePicker apScript;

@@ -10,7 +10,7 @@ public class ApplePicker : MonoBehaviour {
     public bool ExtraHard { get => extraHard; set => extraHard = value; }
     public int NumBaskets { get => numBaskets; set => numBaskets = value; }
     public List<GameObject> BasketList { get => basketList; set => basketList = value; }
-    // [Header("Set in Inspector")] No. 
+    [Header("Set in Inspector")]
     public GameObject basketPrefab;
     private int numBaskets = 3;
     private static float basketBottomY = -14f, basketSpacingY = 2f;
