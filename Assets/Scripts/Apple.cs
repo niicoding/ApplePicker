@@ -4,29 +4,29 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Apple : MonoBehaviour {
-    public float bottomY = -20f; // Below visible screen.
-    public List<float> dropSpeedList = new List<float> { -1f, -1f, -1f };
+    private static float bottomY = -20f; // Below visible screen.
+    private static List<float> dropSpeedList = new List<float> { -1f, -1f, -1f };
+    private GameObject apple;
+    private static Color defaultAppleColor = Color.red;
+    ApplePicker apScript;
+
     public void Start() {
-        this.gameObject.GetComponent<Renderer>().material.color = Color.red;
-        SetDifficulty(this.gameObject.GetComponent<Rigidbody>(), this.gameObject.GetComponent<Renderer>(), int.Parse(Basket.ScoreGT.text));
+        apple = this.gameObject;
+        apple.GetComponent<Renderer>().material.color = defaultAppleColor;
+        apScript = Camera.main.GetComponent<ApplePicker>();
+        //this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        SetDifficulty(apple.GetComponent<Rigidbody>(), apple.GetComponent<Renderer>(), int.Parse(Basket.ScoreGT.text));
     }
     void Update() {
-        ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
         if (apScript.basketList.Count != 0) {
             Color appleColor = this.gameObject.GetComponent<Renderer>().material.color;
             Color basketColor = apScript.basketList[apScript.basketList.Count - 1].GetComponent<Renderer>().material.color;
-            // If offscreen, delete apple.
-            if (transform.position.y < bottomY && !ApplePicker.extraHard) {
+            if (transform.position.y < bottomY && !ApplePicker.extraHard) {  // If offscreen, delete apple.
                 Destroy(this.gameObject);
-                // Get a reference to the Apple Picker component of the Main Camera.
-                // Call the public AppleDestroyed() method of apScript
-                apScript.AppleDestroyed();
+                apScript.AppleDestroyed(); // Get a reference to the Apple Picker component of the Main Camera. Call the public AppleDestroyed() method of apScript
             } else if (transform.position.y < bottomY && ApplePicker.extraHard) {
                 Destroy(this.gameObject);
-                // Get a reference to the Apple Picker component of the Main Camera.
-                // Call the public AppleDestroyed() method of apScript
-                if (appleColor == basketColor)
-                    apScript.AppleDestroyed();
+                if (appleColor == basketColor) apScript.AppleDestroyed(); // Get a reference to the Apple Picker component of the Main Camera. Call the public AppleDestroyed() method of apScript
             }
         }
     }

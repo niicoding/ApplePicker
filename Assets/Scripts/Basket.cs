@@ -5,7 +5,8 @@ using UnityEngine.UI; // This line enables use of uGUI features.
 public class Basket : MonoBehaviour {
     [Header("Set Dynamically")]
     public static Text scoreGT;
-    public static Text ScoreGT {
+    public static Text ScoreGT
+    {
         get { return scoreGT; }
         set { scoreGT = value; }
     }
@@ -29,14 +30,15 @@ public class Basket : MonoBehaviour {
         pos.x = mousePos3D.x;
         this.transform.position = pos;
 
-        if (int.Parse(ScoreGT.text) >= 4000) ApplePicker.extraHard = true; 
+        if (int.Parse(ScoreGT.text) >= 4000) ApplePicker.extraHard = true;
     }
     private void OnCollisionEnter(Collision collision) {
         // Find out what hit this basket.
         GameObject collidedWith = collision.gameObject;
 
         ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
-        if (collidedWith.tag == "Apple") {
+        if (collidedWith.tag == "Apple")
+        {
             Destroy(collidedWith);
             int score = int.Parse(scoreGT.text); // Parse the text of the scoreGT into an int.
             Color color = collidedWith.GetComponent<Renderer>().material.color, basketColor = this.gameObject.GetComponent<Renderer>().material.color; // Color of the collidedBasket
